@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}User details{% endblock %}
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% if current_user.is_authenticated %}
+        {% include 'includes/navbar.html' %}
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Fines Sum</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <th scope="row">{{ user.id }}</th>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {% for fine in user.fines %}
+                            {{ fine.sum }}<br>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

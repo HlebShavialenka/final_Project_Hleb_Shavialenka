@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}Fines{% endblock %}
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% if current_user.is_authenticated %}
+        {% include 'includes/navbar.html' %}
+        {% if fines %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Sum</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Payed</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fine in fines %}
+                    <tr>
+                        <th scope="row">{{ fine.id }}</th>
+                        <td>{{ fine.user.username }}</td>
+                        <td>{{ fine.type_id }}</td>
+                        <td>{{ fine.sum }}</td>
+                        <td>
+                            <!-- Button trigger modal -->
+                            <a type="button" class="text-primary" data-toggle="modal"
+                               data-target="#exampleModal{{ fine.id }}">
+                                {% if fine.description %}
+                                    {{ fine.description }}
+                                {% else %}
+                                    Add description
+                                {% endif %}
+                            </a>
+
+                        </td>
+                        <td>{{ fine.is_payed }}</td>
+                    </tr>
+                    <div class="modal fade" id="exampleModal{{ fine.id }}" tabindex="-1"
+                         aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Change description</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <form class="d-flex" method="post" autocomplete="off">
+                                    <div class="modal-body">
+                                        <input class="form-control mr-2" name="description" type="text">
+                                        <input class="form-control mr-2" name="fineId" value="{{ fine.id }}"
+                                               type="hidden">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% else %}
+                <div class="fines">
+                    <br>
+                    <h3 class="message">There are no fines yet!</h3>
+                </div>
+
+                </tbody>
+            </table>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

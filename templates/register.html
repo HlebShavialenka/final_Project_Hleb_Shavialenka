@@ -1,0 +1,35 @@
+{% extends 'login.html' %}
+
+{% block form %}
+    <form method="post">
+        <div class="form-group mb-3">
+            <input id="email" name="email" type="text" placeholder="Email"
+                   required=""
+                   autofocus=""
+                   class="form-control rounded-pill border-0 shadow-sm px-4">
+        </div>
+        <div class="form-group mb-3">
+            <input id="username" name="username" type="text" placeholder="Username" required=""
+                   autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+        </div>
+        <div class="form-group mb-3">
+            <input id="password" name="password" type="password" placeholder="Password" required=""
+                   class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+        </div>
+        <div class="form-group mb-3">
+            <input id="repass" name="repass" type="password" placeholder="Repeat Password" required=""
+                   class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+        </div>
+        <div class="custom-control custom-checkbox mb-3">
+            <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+            <label for="customCheck1" class="custom-control-label">Stay in</label>
+        </div>
+        <button type="submit"
+                class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">
+            Sign up
+        </button>
+        <div class="text-center d-flex justify-content-between mt-4"><p>Already have an
+            account? <a href="/login" class="font-italic text-muted">
+                <u>Sign in</u></a></p></div>
+    </form>
+{% endblock %}
